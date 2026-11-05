@@ -1374,8 +1374,8 @@ void front_run(void (*guest)(void)) {
             g_layer.colorspace = ecs; CGColorSpaceRelease(ecs);
             g_layer.wantsExtendedDynamicRangeContent = YES;
             if (CAEDRMetadata.available) { g_hdr_meta = 1; front_hdr_metadata(); }
-            if (atoi(getenv("DM_HDR")) == 2) win.title = [win.title stringByAppendingString:@" (DM_HDR=2: HDR on any screen)"];   // told apart from the setting's DM_HDR=1
             else LOG("[RED] front end: no EDR metadata on this Mac (CAEDRMetadata): values above the screen's headroom clip");
+            if (atoi(getenv("DM_HDR")) == 2) win.title = [win.title stringByAppendingString:@" (DM_HDR=2: HDR on any screen)"];   // told apart from the setting's DM_HDR=1
             LOG("front end: HDR output on (DM_HDR): the window's layer is %s%s; the screen's headroom %.2f now, at most %.2f", pq ? "RGB10A2 in BT.2100 PQ" : "RGBA16Float in extended linear BT.2020 (DM_HDR_LAYER=float)", g_hdr_meta ? ", with HDR10 metadata" : "",
                 (win.screen ?: NSScreen.mainScreen).maximumExtendedDynamicRangeColorComponentValue, (win.screen ?: NSScreen.mainScreen).maximumPotentialExtendedDynamicRangeColorComponentValue);
             front_hdr_screen_read(win.screen ?: NSScreen.mainScreen);
